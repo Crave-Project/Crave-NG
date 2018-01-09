@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Crave
+Comment=Crave P2P Cryptocurrency
+Comment[fr]=Crave, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Crave, eşten eşe kriptografik sanal para birimi
+Exec=crave-qt %u
+Terminal=false
+Type=Application
+Icon=crave128
+MimeType=x-scheme-handler/crave;
+Categories=Office;Finance;

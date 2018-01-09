@@ -1,0 +1,26 @@
+# /etc/conf.d/craved: config file for /etc/init.d/craved
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/crave/crave.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/craved"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/craved.pid"
+
+# Where to write craved data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/craved"
+
+# User and group to own craved process
+#BITCOIND_USER="crave"
+#BITCOIND_GROUP="crave"
+
+# Path to craved executable
+#BITCOIND_BIN="/usr/bin/craved"
+
+# Nice value to run craved under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""
