@@ -424,13 +424,13 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-// Windows < Vista: C:\Documents and Settings\Username\Application Data\Crave
-// Windows >= Vista: C:\Users\Username\AppData\Roaming\Crave
-// Mac: ~/Library/Application Support/Crave
+// Windows < Vista: C:\Documents and Settings\Username\Application Data\CraveNG
+// Windows >= Vista: C:\Users\Username\AppData\Roaming\CraveNG
+// Mac: ~/Library/Application Support/CraveNG
 // Unix: ~/.crave
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Crave";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "CraveNG";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -442,10 +442,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "Crave";
+    return pathRet / "CraveNG";
 #else
     // Unix
-    return pathRet / ".crave";
+    return pathRet / ".craveng";
 #endif
 #endif
 }
