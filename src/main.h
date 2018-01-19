@@ -370,9 +370,6 @@ bool IsTransactionInChain(uint256 txId, int& nHeightTx);
 bool IsBlockHashInChain(const uint256& hashBlock);
 void PopulateInvalidOutPointMap();
 bool ValidOutPoint(const COutPoint out, int nHeight);
-void RecalculateZCRAVESpent();
-void RecalculateZCRAVEMinted();
-bool RecalculateCRAVESupply(int nHeightStart);
 bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError);
 
 
