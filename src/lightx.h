@@ -33,7 +33,7 @@ class CConsensusVote;
 class CTransaction;
 class CTransactionLock;
 
-static const int MIN_LIGHTX_PROTO_VERSION = 70103;
+static const int MIN_LIGHTX_PROTO_VERSION = 70002;
 
 extern map<uint256, CTransaction> mapTxLockReq;
 extern map<uint256, CTransaction> mapTxLockReqRejected;
