@@ -1,13 +1,13 @@
 Crave version 3.0.4 is now available from:
 
-  <https://github.com/crave-project/crave/releases>
+  <https://github.com/CooleRRSA/crave-ng/releases>
 
 This is a new minor-revision version release, including various bug fixes and
 performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/crave-project/crave/issues>
+  <https://github.com/CooleRRSA/crave-ng/issues>
 
 
 Mandatory Update

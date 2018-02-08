@@ -3,7 +3,7 @@ Crave
 
 Setup
 ---------------------
-[Crave](http://crave.org/wallet) is the original Crave client and it builds the backbone of the network. However, it downloads and stores the entire history of Crave transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[Crave](http://craveproject.net/wallet) is the original Crave client and it builds the backbone of the network. However, it downloads and stores the entire history of Crave transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
@@ -28,8 +28,8 @@ Drag Crave-Qt to your applications folder, and then run Crave-Qt.
 
 * See the documentation at the [Crave Wiki](https://en.bitcoin.it/wiki/Main_Page) ***TODO***
 for help and more information.
-* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [Crave Forum](http://forum.crave.org/).
-* Join one of our Slack groups [Crave Slack Groups](https://crave.org/slack-logins/).
+* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [Crave Forum](http://forum.craveproject.net/).
+* Join one of our Slack groups [Crave Slack Groups](https://craveproject.net/slack-logins/).
 
 Building
 ---------------------
@@ -41,7 +41,7 @@ The following are developer notes on how to build Crave on your native platform.
 
 Development
 ---------------------
-The Crave repo's [root README](https://github.com/Crave-Project/Crave/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Crave repo's [root README](https://github.com/CooleRRSA/crave-ng/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)
@@ -55,7 +55,7 @@ The Crave repo's [root README](https://github.com/Crave-Project/Crave/blob/maste
 
 ### Resources
 
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [Crave](http://forum.crave.org/) forum.
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [Crave](http://forum.craveproject.net/) forum.
 * Join the [Crave-Dev](https://crave-dev.slack.com/) Slack group ([Sign-Up](https://crave-dev.herokuapp.com/)).
 
 ### Miscellaneous

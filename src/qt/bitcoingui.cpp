@@ -1181,11 +1181,11 @@ void BitcoinGUI::setStakingStatus()
     if (nLastCoinStakeSearchInterval) {
         labelStakingIcon->show();
         labelStakingIcon->setPixmap(QIcon(":/icons/staking_active").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
-        labelStakingIcon->setToolTip(tr("Staking is active\n MultiSend: %1").arg(fMultiSend ? tr("Active") : tr("Not Active")));
+        labelStakingIcon->setToolTip(tr("Staking is active\nMultiSend: %1").arg(fMultiSend ? tr("Active") : tr("Not Active")));
     } else {
         labelStakingIcon->show();
         labelStakingIcon->setPixmap(QIcon(":/icons/staking_inactive").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
-        labelStakingIcon->setToolTip(tr("Staking is not active\n MultiSend: %1").arg(fMultiSend ? tr("Active") : tr("Not Active")));
+        labelStakingIcon->setToolTip(tr("Staking is not active\nMultiSend: %1").arg(fMultiSend ? tr("Active") : tr("Not Active")));
     }
 }
 

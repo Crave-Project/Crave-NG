@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/crave-project/crave-detached-sigs.git"
+- "url": "https://github.com/CooleRRSA/crave-ng-detached-sigs.git"
   "dir": "signature"
 files:
 - "crave-osx-unsigned.tar.gz"

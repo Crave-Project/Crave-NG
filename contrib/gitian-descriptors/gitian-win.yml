@@ -22,7 +22,7 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/crave-project/crave.git"
+- "url": "https://github.com/CooleRRSA/crave-ng.git"
   "dir": "crave"
 files: []
 script: |

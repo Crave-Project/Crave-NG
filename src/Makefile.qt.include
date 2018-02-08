@@ -175,6 +175,13 @@ RES_ICONS = \
   qt/res/icons/bitcoin_testnet.ico \
   qt/res/icons/bitcoin_testnet.png \
   qt/res/icons/browse.png \
+  qt/res/icons/buttonhistory.png \
+  qt/res/icons/buttonoverview.png \
+  qt/res/icons/buttonmasternodes.png \
+  qt/res/icons/buttonmymasternodes.png \
+  qt/res/icons/buttonprivacy.png \
+  qt/res/icons/buttonsend.png \
+  qt/res/icons/buttonreceive.png \
   qt/res/icons/clock1.png \
   qt/res/icons/clock2.png \
   qt/res/icons/clock3.png \
@@ -294,6 +301,8 @@ endif
 
 RES_IMAGES = \
   qt/res/images/about.png \
+  qt/res/images/header.png \
+  qt/res/images/privacylogo.png \
   qt/res/images/splash.png \
   qt/res/images/splash_testnet.png \
   qt/res/images/crave_logo_horizontal.png \

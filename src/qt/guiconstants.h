@@ -49,7 +49,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 35
 
 #define QAPP_ORG_NAME "Crave"
-#define QAPP_ORG_DOMAIN "crave.org"
+#define QAPP_ORG_DOMAIN "craveproject.net"
 #define QAPP_APP_NAME_DEFAULT "Crave-Qt"
 #define QAPP_APP_NAME_TESTNET "Crave-Qt-testnet"
 

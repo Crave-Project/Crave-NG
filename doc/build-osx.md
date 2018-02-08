@@ -44,7 +44,7 @@ Instructions: Homebrew
 
 1. Clone the github tree to get the source code and go into the directory.
 
-        git clone https://github.com/Crave-Project/Crave.git
+        git clone https://github.com/CooleRRSA/crave-ng.git
         cd Crave
 
 2.  Build craved:

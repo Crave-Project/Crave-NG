@@ -22,9 +22,9 @@ Build-Depends: debhelper,
  libqrencode-dev,
  libprotobuf-dev, protobuf-compiler
 Standards-Version: 3.9.2
-Homepage: http://www.crave.org
-Vcs-Git: git://github.com/Crave-Project/Crave.git
-Vcs-Browser: http://github.com/Crave-Project/Crave
+Homepage: http://craveproject.net
+Vcs-Git: git://github.com/CooleRRSA/crave-ng.git
+Vcs-Browser: http://github.com/CooleRRSA/crave-ng
 
 Package: craved
 Architecture: any
