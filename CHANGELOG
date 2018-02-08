@@ -5,3 +5,9 @@ v2.5.0.0
 v2.5.0.1
 --------
 *Changed default datafolder to 'CraveNG'.
+
+v2.5.0.2
+--------
+*LightX protocol version fix
+*Total supply fix (complete resync needed)
+*Cross-compiling building fixes
