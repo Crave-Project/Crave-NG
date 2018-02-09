@@ -5,7 +5,7 @@ This guide will show you how to build craved (headless client) for OSX.
 Notes
 -----
 
-* Tested on OS X 10.7 through 10.10 on 64-bit Intel processors only.
+* Tested on OS X 10.7 through 10.13 on 64-bit Intel processors only.
 
 * All of the commands should be executed in a Terminal application. The
 built-in one is located in `/Applications/Utilities`.
@@ -36,30 +36,27 @@ sections below.
 Instructions: Homebrew
 ----------------------
 
-#### Install dependencies using Homebrew
+### Install dependencies using Homebrew
 
-        brew install autoconf automake berkeley-db4 libtool boost miniupnpc openssl pkg-config protobuf qt5 libzmq
+        brew install autoconf automake berkeley-db4 libtool boost@1.60 miniupnpc openssl pkg-config protobuf qt5
+        brew link boost@1.60 --force
 
 ### Building `craved`
 
-1. Clone the github tree to get the source code and go into the directory.
+1.  Clone the github tree to get the source code and go into the directory.
 
         git clone https://github.com/CooleRRSA/crave-ng.git
-        cd Crave
+        cd crave-ng
 
 2.  Build craved:
 
         ./autogen.sh
-        ./configure --with-gui=qt5
+        ./configure LDFLAGS='-L/usr/local/opt/openssl/lib' CPPFLAGS='-I/usr/local/opt/openssl/include' PKG_CONFIG_PATH='/usr/local/opt/openssl/lib/pkgconfig' --with-gui=qt5
         make
 
-3.  It is also a good idea to build and run the unit tests:
+3.  (Optional) You can also create .dmg package.
 
-        make check
-
-4.  (Optional) You can also install craved to your path:
-
-        make install
+        make deploy
 
 Use Qt Creator as IDE
 ------------------------
@@ -90,7 +87,7 @@ All dependencies should be compiled with these flags:
 
  -mmacosx-version-min=10.7
  -arch x86_64
- -isysroot $(xcode-select --print-path)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk
+ -isysroot $(xcode-select --print-path)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk
 
 Once dependencies are compiled, see release-process.md for how the Crave-Qt.app
 bundle is packaged and signed to create the .dmg disk image that is distributed.
@@ -104,14 +101,14 @@ directory. We have to first create the RPC configuration file, though.
 Run `./craved` to get the filename where it should be put, or just try these
 commands:
 
-    echo -e "rpcuser=craverpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Crave/crave.conf"
-    chmod 600 "/Users/${USER}/Library/Application Support/Crave/crave.conf"
+    echo -e "rpcuser=craverpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/CraveNG/crave.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/CraveNG/crave.conf"
 
 The next time you run it, it will start downloading the blockchain, but it won't
 output anything while it's doing this. This process may take several hours;
 you can monitor its process by looking at the debug.log file, like this:
 
-    tail -f $HOME/Library/Application\ Support/Crave/debug.log
+    tail -f $HOME/Library/Application\ Support/CraveNG/debug.log
 
 Other commands:
 -------
