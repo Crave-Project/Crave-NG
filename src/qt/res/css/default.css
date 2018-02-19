@@ -400,12 +400,12 @@ margin:0px 18px 0px 18px;
 
 
 QScrollBar::handle:vertical { /* Scroll Bar Slider - vertical */
-background:#eeeeee;
+background:#ee3f4b;
 min-height:10px;
 }
 
 QScrollBar::handle:horizontal { /* Scroll Bar Slider - horizontal */
-background:#eeeeee;
+background:#ee3f4b;
 min-width:10px;
 }
 
@@ -420,7 +420,7 @@ height:16px;
 }
 
 QScrollBar::add-line:vertical:pressed, QScrollBar::sub-line:vertical:pressed, QScrollBar::add-line:horizontal:pressed, QScrollBar::sub-line:horizontal:pressed {
-background-color:#eeeeee;
+background-color:#ee3f4b;
 }
 
 QScrollBar::sub-line:vertical { /* Vertical - top button position */
