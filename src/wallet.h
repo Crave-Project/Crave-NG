@@ -480,6 +480,7 @@ public:
     bool MultiSend();
     void AutoCombineDust();
     void AutoZeromint();
+    uint64_t GetStakeWeight() const;
 
     static CFeeRate minTxFee;
     static CAmount GetMinimumFee(unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool);

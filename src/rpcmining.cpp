@@ -253,6 +253,41 @@ Value getmininginfo(const Array& params, bool fHelp)
     return obj;
 }
 
+Value getstakinginfo(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 0)
+        throw runtime_error(
+            "getstakinginfo\n"
+            "\nReturns an object containing staking-related information."
+            "\nResult:\n"
+            "{\n"
+            "  \"enabled\": true|false,     (boolean) Is staking enabled\n"
+            "  \"staking\": true|false,     (numeric) Is staking available\n"
+            "  \"weight\": nnn,             (numeric) Your stake weight\n"
+            "  \"netstakeweight\": nnn,     (numeric) Network stake weight\n"
+            "  \"expectedtime\": nnn        (numeric) Expected time in seconds to earn reward\n"
+            "}\n"
+            "\nExamples:\n" +
+            HelpExampleCli("getstakinginfo", "") + HelpExampleRpc("getstakinginfo", ""));            
+
+    uint64_t nWeight = 0;
+    uint64_t nExpectedTime = 0;
+    
+    if (pwalletMain)
+        nWeight = pwalletMain->GetStakeWeight();
+
+    uint64_t nNetworkWeight = GetPoSKernelPS();
+    bool staking = nLastCoinStakeSearchInterval && nWeight;
+    nExpectedTime = staking ? (Params().TargetSpacing() * nNetworkWeight / nWeight) : 0;
+
+    Object obj;
+    obj.push_back(Pair("enabled", GetBoolArg("-staking", true)));
+    obj.push_back(Pair("staking", staking));
+    obj.push_back(Pair("weight", (uint64_t)nWeight / COIN));
+    obj.push_back(Pair("netstakeweight", (uint64_t)nNetworkWeight / COIN));
+    obj.push_back(Pair("expectedtime", nExpectedTime));
+    return obj;
+}
 
 // NOTE: Unlike wallet RPC (which use BTC values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
 Value prioritisetransaction(const Array& params, bool fHelp)

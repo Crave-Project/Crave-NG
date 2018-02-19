@@ -55,6 +55,7 @@
 #include <QStyle>
 #include <QTimer>
 #include <QToolBar>
+#include <QToolTip>
 #include <QVBoxLayout>
 
 #if QT_VERSION < 0x050000
@@ -65,6 +66,7 @@
 #endif
 
 const QString BitcoinGUI::DEFAULT_WALLET = "~Default";
+double GetPoSKernelPS();
 
 BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMainWindow(parent),
                                                                             clientModel(0),
@@ -111,7 +113,8 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
                                                                             rpcConsole(0),
                                                                             explorerWindow(0),
                                                                             prevBlocks(0),
-                                                                            spinnerFrame(0)
+                                                                            spinnerFrame(0),
+                                                                            nWeight(0)
 {
     /* Open CSS when configured */
     this->setStyleSheet(GUIUtil::loadStyleSheet());
@@ -1172,19 +1175,72 @@ bool BitcoinGUI::eventFilter(QObject* object, QEvent* event)
     return QMainWindow::eventFilter(object, event);
 }
 
+void BitcoinGUI::updateWeight()
+{
+    if (!pwalletMain)
+        return;
+
+    TRY_LOCK(cs_main, lockMain);
+    if (!lockMain)
+        return;
+
+    TRY_LOCK(pwalletMain->cs_wallet, lockWallet);
+    if (!lockWallet)
+        return;
+
+    nWeight = pwalletMain->GetStakeWeight();
+}
+
 void BitcoinGUI::setStakingStatus()
 {
+    updateWeight();
+    
     if (pwalletMain)
         fMultiSend = pwalletMain->isMultiSendEnabled();
 
     if (nLastCoinStakeSearchInterval) {
+        
+        uint64_t nWeight = this->nWeight;
+        uint64_t nNetworkWeight = GetPoSKernelPS();
+        
+        unsigned nEstimateTime = 0;
+        nEstimateTime = Params().TargetSpacing() * nNetworkWeight / nWeight;        
+        
+        QString stakeTime;
+        if (nEstimateTime < 60)
+        {
+            stakeTime = tr("%n second(s)", "", nEstimateTime);
+        }
+        else if (nEstimateTime < 60*60)
+        {
+            stakeTime = tr("%n minute(s)", "", nEstimateTime/60);
+        }
+        else if (nEstimateTime < 24*60*60)
+        {
+            stakeTime = tr("%n hour(s)", "", nEstimateTime/(60*60));
+        }
+        else
+        {
+            stakeTime = tr("%n day(s)", "", nEstimateTime/(60*60*24));
+        }        
+        
+        nWeight /= COIN;
+        nNetworkWeight /= COIN;
+        
         labelStakingIcon->show();
         labelStakingIcon->setPixmap(QIcon(":/icons/staking_active").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
-        labelStakingIcon->setToolTip(tr("Staking is active\nMultiSend: %1").arg(fMultiSend ? tr("Active") : tr("Not Active")));
+        labelStakingIcon->setToolTip(tr("<b>Staking is:</b> Active<br>"
+                                        "<b>Your weight is:</b> %1<br>"
+                                        "<b>Network weight is:</b> %2<br>"
+                                        "<b>Expected time to earn reward is:</b> %3<br>"
+                                        "<b>MultiSend:</b> %4"
+        ).arg(nWeight).arg(nNetworkWeight).arg(stakeTime).arg(fMultiSend ? tr("Active") : tr("Not Active")));
     } else {
         labelStakingIcon->show();
         labelStakingIcon->setPixmap(QIcon(":/icons/staking_inactive").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
-        labelStakingIcon->setToolTip(tr("Staking is not active\nMultiSend: %1").arg(fMultiSend ? tr("Active") : tr("Not Active")));
+        labelStakingIcon->setToolTip(tr("<b>Staking is:</b> Not Active<br>"
+                                        "<b>MultiSend:</b> %1"
+        ).arg(fMultiSend ? tr("Active") : tr("Not Active")));
     }
 }
 

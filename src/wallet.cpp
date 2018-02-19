@@ -2518,6 +2518,43 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWa
     return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl, coin_type, useIX, nFeePay);
 }
 
+uint64_t CWallet::GetStakeWeight() const
+{
+    // Choose coins to use
+    int64_t nBalance = GetBalance();
+
+    if (nBalance <= nReserveBalance)
+        return 0;
+
+    vector<const CWalletTx*> vwtxPrev;
+
+    static std::set<pair<const CWalletTx*, unsigned int> > setCoins;
+    setCoins.clear();
+    int64_t nValueIn = 0;
+
+    if (!SelectStakeCoins(setCoins, nBalance - nReserveBalance))
+        return 0;
+
+    if (setCoins.empty())
+        return 0;
+
+    uint64_t nWeight = 0;
+    uint256 hashBlock;
+    int64_t nCurrentTime = GetTime();
+    CTransaction txPrev;
+
+    LOCK2(cs_main, cs_wallet);
+    BOOST_FOREACH(PAIRTYPE(const CWalletTx*, unsigned int) pcoin, setCoins)
+    {
+        if (!GetTransaction(pcoin.first->GetHash(), txPrev, hashBlock, true))
+            continue;
+        if (nCurrentTime - pcoin.first->GetTxTime() > nStakeMinAge)
+            nWeight += pcoin.first->vout[pcoin.second].nValue;
+    }
+
+    return nWeight;
+}
+
 // ppcoin: create coin stake transaction
 bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CMutableTransaction& txNew, unsigned int& nTxNewTime)
 {
