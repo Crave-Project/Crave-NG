@@ -158,7 +158,7 @@ Value masternode(const Array& params, bool fHelp)
             "  start-alias  - Start single masternode by assigned alias configured in masternode.conf\n"
             "  start-<mode> - Start masternodes configured in masternode.conf (<mode>: 'all', 'missing', 'disabled')\n"
             "  status       - Print masternode status information\n"
-            "  list         - Print list of all known masternodes (see masternodelist for more info)\n"
+            "  list         - Print list of all known masternodes (see listmasternodes for more info)\n"
             "  list-conf    - Print masternode.conf in JSON format\n"
             "  winners      - Print list of masternode winners\n");
 
@@ -265,7 +265,7 @@ Value listmasternodes(const Array& params, bool fHelp)
             "  ,...\n"
             "]\n"
             "\nExamples:\n" +
-            HelpExampleCli("masternodelist", "") + HelpExampleRpc("masternodelist", ""));
+            HelpExampleCli("listmasternodes", "") + HelpExampleRpc("listmasternodes", ""));
 
     Array ret;
     int nHeight;
