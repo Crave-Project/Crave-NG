@@ -32,6 +32,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
                                                                     ui(new Ui::HelpMessageDialog)
 {
     ui->setupUi(this);
+    setMinimumSize(720,390);
     GUIUtil::restoreWindowGeometry("nHelpMessageDialogWindow", this->size(), this);
 
     QString version = tr("Crave") + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());

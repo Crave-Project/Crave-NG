@@ -189,8 +189,8 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
     frameBlocks->setContentsMargins(0, 0, 0, 0);
     frameBlocks->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
     QHBoxLayout* frameBlocksLayout = new QHBoxLayout(frameBlocks);
-    frameBlocksLayout->setContentsMargins(3, 0, 3, 0);
-    frameBlocksLayout->setSpacing(3);
+    frameBlocksLayout->setContentsMargins(0, 0, 0, 0);
+    frameBlocksLayout->setSpacing(0);
     unitDisplayControl = new UnitDisplayStatusBarControl();
     labelStakingIcon = new QLabel();
     labelEncryptionIcon = new QPushButton();
@@ -561,11 +561,12 @@ void BitcoinGUI::createToolBars()
 
         // creating header logo
         QLabel* header = new QLabel();
-        header->setMinimumSize(200, 160);
-        header->setMaximumSize(200, 160);
+        header->setMinimumSize(200, 310);
+        header->setMaximumSize(200, 310);
         header->setAlignment(Qt::AlignTop);
         header->setPixmap(QPixmap(":/images/header"));
         header->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        header->setContentsMargins(0,0,0,0);
         toolbar->addWidget(header);
 
         QWidget *spacerWidget = new QWidget();
@@ -579,7 +580,8 @@ void BitcoinGUI::createToolBars()
         toolbar->addAction(privacyAction);
         toolbar->addAction(historyAction);
         toolbar->addAction(privacyAction);
-        toolbar->setIconSize(QSize(200, 29));
+        toolbar->setIconSize(QSize(200, 30));
+        toolbar->setContentsMargins(0,4,0,4);
         
         QSettings settings;
         if (settings.value("fShowMasternodesTab").toBool()) {

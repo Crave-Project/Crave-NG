@@ -1378,13 +1378,13 @@ Immature: confirmed, but less than 2 mints of the same denomination after it was
           <widget class="QLabel" name="PrivacyLogo">
            <property name="minimumSize">
             <size>
-             <width>320</width>
+             <width>180</width>
              <height>200</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>320</width>
+             <width>180</width>
              <height>200</height>
             </size>
            </property>
