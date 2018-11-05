@@ -836,12 +836,45 @@ CAmount CBudgetManager::GetTotalBudget(int nHeight)
 
     //get block value and calculate from that
     CAmount nSubsidy = 0;
-    if (nHeight >= Params().LAST_POW_BLOCK()) {
-        nSubsidy = 11 * COIN;
-    } else {
-        nSubsidy = 0 * COIN; 
-    }
 
+    if (nHeight >= Params().LAST_POW_BLOCK() && nHeight < 500000) {
+        nSubsidy = 11 * COIN;
+    } else if (nHeight >= 500000 && nHeight < 1000000) {
+        nSubsidy = 9.62 * COIN;
+    } else if (nHeight >= 1000000 && nHeight < 1500000) {
+        nSubsidy = 8.41 * COIN;
+    } else if (nHeight >= 1500000 && nHeight < 2000000) {
+        nSubsidy = 7.37 * COIN;
+    } else if (nHeight >= 2000000 && nHeight < 2500000) {
+        nSubsidy = 6.46 * COIN;
+    } else if (nHeight >= 2500000 && nHeight < 3000000) {
+        nSubsidy = 5.72 * COIN;
+    } else if (nHeight >= 3000000 && nHeight < 3500000) {
+        nSubsidy = 5.03 * COIN;
+    } else if (nHeight >= 3500000 && nHeight < 4000000) {
+        nSubsidy = 4.41 * COIN;
+    } else if (nHeight >= 4000000 && nHeight < 4500000) {
+        nSubsidy = 3.87 * COIN;
+    } else if (nHeight >= 4500000 && nHeight < 5000000) {
+        nSubsidy = 3.37 * COIN;
+    } else if (nHeight >= 5000000 && nHeight < 5500000) {
+        nSubsidy = 2.94 * COIN;
+    } else if (nHeight >= 5500000 && nHeight < 6000000) {
+        nSubsidy = 2.55 * COIN;
+    } else if (nHeight >= 6000000 && nHeight < 6500000) {
+        nSubsidy = 2.23 * COIN;
+    } else if (nHeight >= 6500000 && nHeight < 7000000) {
+        nSubsidy = 1.98 * COIN;
+    } else if (nHeight >= 7000000 && nHeight < 7500000) {
+        nSubsidy = 1.73 * COIN;
+    } else if (nHeight >= 7500000 && nHeight < 8000000) {
+        nSubsidy = 1.53 * COIN;
+    } else if (nHeight >= 8000000 && nHeight < 8500000) {
+        nSubsidy = 1.4 * COIN;
+    } else if (nHeight >= 8500000) {
+        nSubsidy = 1.3 * COIN;
+    }
+    
     // Amount of blocks in a months period of time (using 1 minutes per) = (60*24*30)
     return ((nSubsidy / 100) * 10) * 1440 * 30;
 }

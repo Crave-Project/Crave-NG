@@ -2177,19 +2177,91 @@ int64_t GetBlockValue(int nHeight)
     int64_t nSubsidy = 0;
     
     if (nHeight == 0) {
-        nSubsidy = 14000000 * COIN;
+        nSubsidy = 14000000 * COIN; // Coinswap premine
     } else if (nHeight > 0 && nHeight < Params().LAST_POW_BLOCK()) {
         nSubsidy = 1000 * COIN;
-    } else {
-        nSubsidy = 10 * COIN; 
+    } else if (nHeight >= Params().LAST_POW_BLOCK() && nHeight < 500000) {
+        nSubsidy = 10 * COIN;
+    } else if (nHeight >= 500000 && nHeight < 1000000) {
+        nSubsidy = 8.75 * COIN;
+    } else if (nHeight >= 1000000 && nHeight < 1500000) {
+        nSubsidy = 7.65 * COIN;
+    } else if (nHeight >= 1500000 && nHeight < 2000000) {
+        nSubsidy = 6.7 * COIN;
+    } else if (nHeight >= 2000000 && nHeight < 2500000) {
+        nSubsidy = 5.88 * COIN;
+    } else if (nHeight >= 2500000 && nHeight < 3000000) {
+        nSubsidy = 5.2 * COIN;
+    } else if (nHeight >= 3000000 && nHeight < 3500000) {
+        nSubsidy = 4.58 * COIN;
+    } else if (nHeight >= 3500000 && nHeight < 4000000) {
+        nSubsidy = 4.01 * COIN;
+    } else if (nHeight >= 4000000 && nHeight < 4500000) {
+        nSubsidy = 3.52 * COIN;
+    } else if (nHeight >= 4500000 && nHeight < 5000000) {
+        nSubsidy = 3.07 * COIN;
+    } else if (nHeight >= 5000000 && nHeight < 5500000) {
+        nSubsidy = 2.68 * COIN;
+    } else if (nHeight >= 5500000 && nHeight < 6000000) {
+        nSubsidy = 2.32 * COIN;
+    } else if (nHeight >= 6000000 && nHeight < 6500000) {
+        nSubsidy = 2.03 * COIN;
+    } else if (nHeight >= 6500000 && nHeight < 7000000) {
+        nSubsidy = 1.8 * COIN;
+    } else if (nHeight >= 7000000 && nHeight < 7500000) {
+        nSubsidy = 1.58 * COIN;
+    } else if (nHeight >= 7500000 && nHeight < 8000000) {
+        nSubsidy = 1.4 * COIN;
+    } else if (nHeight >= 8000000 && nHeight < 8500000) {
+        nSubsidy = 1.28 * COIN;
+    } else if (nHeight >= 8500000) {
+        nSubsidy = 1.2 * COIN;
     }
     return nSubsidy;
 }
 
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount)
 {
-    int64_t ret = blockValue * 3 / 5;
-    return ret;
+    int64_t nPayment = 0;
+    
+    if (nHeight >= 0 && nHeight < 500000) {
+        nPayment = blockValue * 3 / 5;
+    } else if (nHeight >= 500000 && nHeight < 1000000) {
+        nPayment = 5.4 * COIN;
+    } else if (nHeight >= 1000000 && nHeight < 1500000) {
+        nPayment = 4.85 * COIN;
+    } else if (nHeight >= 1500000 && nHeight < 2000000) {
+        nPayment = 4.35 * COIN;
+    } else if (nHeight >= 2000000 && nHeight < 2500000) {
+        nPayment = 3.9 * COIN;
+    } else if (nHeight >= 2500000 && nHeight < 3000000) {
+        nPayment = 3.55 * COIN;
+    } else if (nHeight >= 3000000 && nHeight < 3500000) {
+        nPayment = 3.2 * COIN;
+    } else if (nHeight >= 3500000 && nHeight < 4000000) {
+        nPayment = 2.85 * COIN;
+    } else if (nHeight >= 4000000 && nHeight < 4500000) {
+        nPayment = 2.55 * COIN;
+    } else if (nHeight >= 4500000 && nHeight < 5000000) {
+        nPayment = 2.25 * COIN;
+    } else if (nHeight >= 5000000 && nHeight < 5500000) {
+        nPayment = 2 * COIN;
+    } else if (nHeight >= 5500000 && nHeight < 6000000) {
+        nPayment = 1.75 * COIN;
+    } else if (nHeight >= 6000000 && nHeight < 6500000) {
+        nPayment = 1.55 * COIN;
+    } else if (nHeight >= 6500000 && nHeight < 7000000) {
+        nPayment = 1.4 * COIN;
+    } else if (nHeight >= 7000000 && nHeight < 7500000) {
+        nPayment = 1.25 * COIN;
+    } else if (nHeight >= 7500000 && nHeight < 8000000) {
+        nPayment = 1.12 * COIN;
+    } else if (nHeight >= 8000000 && nHeight < 8500000) {
+        nPayment = 1.05 * COIN;
+    } else if (nHeight >= 8500000) {
+        nPayment = 1 * COIN;
+    }
+    return nPayment;
 }
 
 bool IsInitialBlockDownload()
