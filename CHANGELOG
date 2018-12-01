@@ -15,3 +15,11 @@ v2.5.0.2
 v2.5.0.3
 --------
 *Logo and color scheme redesign
+
+v2.5.1
+--------
+MANDATORY UPDATE
+EVERY WALLET/NODE MUST BE UPGRADED BEFORE BLOCK 500000
+*New reward schedule
+*New semantic versioning
+*One build for Mac OS
