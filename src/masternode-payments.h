@@ -9,7 +9,6 @@
 #include "key.h"
 #include "main.h"
 #include "masternode.h"
-#include <boost/lexical_cast.hpp>
 
 using namespace std;
 
@@ -30,7 +29,7 @@ void ProcessMessageMasternodePayments(CNode* pfrom, std::string& strCommand, CDa
 bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight);
 std::string GetRequiredPaymentsString(int nBlockHeight);
 bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMinted);
-void FillBlockPayee(CMutableTransaction& txNew, CAmount nFees, bool fProofOfStake);
+void FillBlockPayee(CMutableTransaction& txNew, CAmount nFees, bool fProofOfStake, bool fZPIVStake);
 
 void DumpMasternodePayments();
 
@@ -218,9 +217,9 @@ public:
     {
         std::string ret = "";
         ret += vinMasternode.ToString();
-        ret += ", " + boost::lexical_cast<std::string>(nBlockHeight);
+        ret += ", " + std::to_string(nBlockHeight);
         ret += ", " + payee.ToString();
-        ret += ", " + boost::lexical_cast<std::string>((int)vchSig.size());
+        ret += ", " + std::to_string((int)vchSig.size());
         return ret;
     }
 };
@@ -283,7 +282,7 @@ public:
     int GetMinMasternodePaymentsProto();
     void ProcessMessageMasternodePayments(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
     std::string GetRequiredPaymentsString(int nBlockHeight);
-    void FillBlockPayee(CMutableTransaction& txNew, int64_t nFees, bool fProofOfStake);
+    void FillBlockPayee(CMutableTransaction& txNew, int64_t nFees, bool fProofOfStake, bool fZPIVStake);
     std::string ToString() const;
     int GetOldestBlock();
     int GetNewestBlock();

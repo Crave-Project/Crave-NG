@@ -14,7 +14,7 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
-  $(MAKE) CPPFLAGS+="-DHAVE__XEATDATAWORDS"
+  $(MAKE)
 endef
 
 define $(package)_stage_cmds
