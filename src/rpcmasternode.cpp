@@ -54,7 +54,7 @@ void SendMoney(const CTxDestination& address, CAmount nValue, CWalletTx& wtxNew,
 Value obfuscation(const Array& params, bool fHelp)
 {
     throw runtime_error("Obfuscation is not supported any more. Use Zerocoin\n");
-    
+
     if (fHelp || params.size() == 0)
         throw runtime_error(
             "obfuscation <craveaddress> <amount>\n"
@@ -154,11 +154,11 @@ Value masternode(const Array& params, bool fHelp)
             "  debug        - Print masternode status\n"
             "  genkey       - Generate new masternodeprivkey\n"
             "  outputs      - Print masternode compatible outputs\n"
-            "  start        - Start masternode configured in crave.conf\n"
+            "  start        - Start masternode configured in pivx.conf\n"
             "  start-alias  - Start single masternode by assigned alias configured in masternode.conf\n"
             "  start-<mode> - Start masternodes configured in masternode.conf (<mode>: 'all', 'missing', 'disabled')\n"
             "  status       - Print masternode status information\n"
-            "  list         - Print list of all known masternodes (see listmasternodes for more info)\n"
+            "  list         - Print list of all known masternodes (see masternodelist for more info)\n"
             "  list-conf    - Print masternode.conf in JSON format\n"
             "  winners      - Print list of masternode winners\n");
 
@@ -253,12 +253,10 @@ Value listmasternodes(const Array& params, bool fHelp)
             "[\n"
             "  {\n"
             "    \"rank\": n,           (numeric) Masternode Rank (or 0 if not enabled)\n"
-            "    \"txhash\": \"hash\",  (string) Collateral transaction hash\n"
+            "    \"txhash\": \"hash\",    (string) Collateral transaction hash\n"
             "    \"outidx\": n,         (numeric) Collateral transaction output index\n"
             "    \"status\": s,         (string) Status (ENABLED/EXPIRED/REMOVE/etc)\n"
-            "    \"addr\": \"addr\",    (string) Masternode Crave address\n"
-            "    \"ip\": \"ip\",        (string) Masternode IP\n"
-            "    \"port\": \"port\",    (numeric) Masternode Port\n"
+            "    \"addr\": \"addr\",      (string) Masternode Crave address\n"
             "    \"version\": v,        (numeric) Masternode protocol version\n"
             "    \"lastseen\": ttt,     (numeric) The time in seconds since epoch (Jan 1 1970 GMT) of the last seen\n"
             "    \"activetime\": ttt,   (numeric) The time in seconds since epoch (Jan 1 1970 GMT) masternode has been active\n"
@@ -267,7 +265,7 @@ Value listmasternodes(const Array& params, bool fHelp)
             "  ,...\n"
             "]\n"
             "\nExamples:\n" +
-            HelpExampleCli("listmasternodes", "") + HelpExampleRpc("listmasternodes", ""));
+            HelpExampleCli("masternodelist", "") + HelpExampleRpc("masternodelist", ""));
 
     Array ret;
     int nHeight;
@@ -304,8 +302,6 @@ Value listmasternodes(const Array& params, bool fHelp)
             obj.push_back(Pair("outidx", (uint64_t)oIdx));
             obj.push_back(Pair("status", strStatus));
             obj.push_back(Pair("addr", CBitcoinAddress(mn->pubKeyCollateralAddress.GetID()).ToString()));
-            obj.push_back(Pair("ip", mn->addr.ToStringIP()));
-            obj.push_back(Pair("port", mn->addr.GetPort()));
             obj.push_back(Pair("version", mn->protocolVersion));
             obj.push_back(Pair("lastseen", (int64_t)mn->lastPing.sigTime));
             obj.push_back(Pair("activetime", (int64_t)(mn->lastPing.sigTime - mn->sigTime)));
@@ -534,7 +530,8 @@ Value startmasternode (const Array& params, bool fHelp)
                 if (strCommand == "disabled" && pmn->IsEnabled()) continue;
             }
 
-            bool result = activeMasternode.Register(mne.getIp(), mne.getPrivKey(), mne.getTxHash(), mne.getOutputIndex(), errorMessage);
+            CMasternodeBroadcast mnb;
+            bool result = activeMasternode.CreateBroadcast(mne.getIp(), mne.getPrivKey(), mne.getTxHash(), mne.getOutputIndex(), errorMessage, mnb);
 
             Object statusObj;
             statusObj.push_back(Pair("alias", mne.getAlias()));
@@ -579,7 +576,8 @@ Value startmasternode (const Array& params, bool fHelp)
                 found = true;
                 std::string errorMessage;
 
-                bool result = activeMasternode.Register(mne.getIp(), mne.getPrivKey(), mne.getTxHash(), mne.getOutputIndex(), errorMessage);
+                CMasternodeBroadcast mnb;
+                bool result = activeMasternode.CreateBroadcast(mne.getIp(), mne.getPrivKey(), mne.getTxHash(), mne.getOutputIndex(), errorMessage, mnb);
 
                 statusObj.push_back(Pair("result", result ? "successful" : "failed"));
 

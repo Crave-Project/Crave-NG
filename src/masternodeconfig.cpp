@@ -3,13 +3,11 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-// clang-format off
-#include "net.h"
+#include "netbase.h"
 #include "masternodeconfig.h"
 #include "util.h"
 #include "ui_interface.h"
 #include <base58.h>
-// clang-format on
 
 CMasternodeConfig masternodeConfig;
 

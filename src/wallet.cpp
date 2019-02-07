@@ -2722,7 +2722,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     }
 
     //Masternode payment
-    FillBlockPayee(txNew, nMinFee, true);
+    FillBlockPayee(txNew, nMinFee, true, false);
 
     // Sign
     int nIn = 0;
