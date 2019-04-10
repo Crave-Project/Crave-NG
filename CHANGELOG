@@ -1,0 +1,25 @@
+v2.5.0.0
+--------
+*Initial release for coinswap.
+
+v2.5.0.1
+--------
+*Changed default datafolder to 'CraveNG'.
+
+v2.5.0.2
+--------
+*LightX protocol version fix
+*Total supply fix (complete resync needed)
+*Cross-compiling building fixes
+
+v2.5.0.3
+--------
+*Logo and color scheme redesign
+
+v2.5.1
+--------
+MANDATORY UPDATE
+EVERY WALLET/NODE MUST BE UPGRADED BEFORE BLOCK 500000
+*New reward schedule
+*New semantic versioning
+*One build for Mac OS

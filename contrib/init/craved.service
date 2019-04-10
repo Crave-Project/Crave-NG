@@ -1,0 +1,26 @@
+[Unit]
+Description=Crave's distributed currency daemon
+After=network.target
+
+[Service]
+User=crave
+Group=crave
+
+Type=forking
+PIDFile=/var/lib/craved/craved.pid
+
+ExecStart=/usr/bin/craved -daemon -pid=/var/lib/craved/craved.pid \
+          -conf=/etc/crave/crave.conf -datadir=/var/lib/craved
+
+ExecStop=-/usr/bin/crave-cli -conf=/etc/crave/crave.conf \
+         -datadir=/var/lib/craved stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
