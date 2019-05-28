@@ -1,4 +1,4 @@
-# Crave-Community-Project
+# Crave-Project
 Crave integration/staging repository
 =====================================
 
@@ -10,7 +10,7 @@ Crave is a cutting edge cryptocurrency, with many features not available in most
 
 ## BCT Thread ##
 
-https://bitcointalk.org/index.php?topic=2547950.0
+https://bitcointalk.org/index.php?action=profile;u=2574630;sa=showPosts
 
 ## Coin Specs ##
 <table>
