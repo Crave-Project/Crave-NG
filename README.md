@@ -10,7 +10,7 @@ Crave is a cutting edge cryptocurrency, with many features not available in most
 
 ## BCT Thread ##
 
-https://bitcointalk.org/index.php?action=profile;u=2574630;sa=showPosts
+https://bitcointalk.org/index.php?topic=5164508.msg51796520#msg51796520
 
 ## Coin Specs ##
 <table>
