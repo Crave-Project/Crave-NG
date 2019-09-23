@@ -49,6 +49,7 @@
 #include <QMimeData>
 #include <QProgressBar>
 #include <QProgressDialog>
+#include <QDesktopServices>
 #include <QSettings>
 #include <QStackedWidget>
 #include <QStatusBar>
@@ -390,6 +391,8 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     quitAction->setStatusTip(tr("Quit application"));
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
+    wwwAction =  new QAction(QIcon(":/icons/bitcoin"), tr("&CRAVE Explorer"), this);
+    wwwAction->setToolTip(tr("View CRAVE Explorer"));
     aboutAction = new QAction(networkStyle->getAppIcon(), tr("&About Crave"), this);
     aboutAction->setStatusTip(tr("Show information about Crave"));
     aboutAction->setMenuRole(QAction::AboutRole);
@@ -466,6 +469,7 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
+    connect(wwwAction, SIGNAL(triggered()), this, SLOT(wwwClicked()));
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(optionsAction, SIGNAL(triggered()), this, SLOT(optionsClicked()));
     connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
@@ -533,6 +537,8 @@ void BitcoinGUI::createMenuBar()
 
     if (walletFrame) {
         QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
+        tools->addAction(wwwAction);
+        tools->addSeparator();
         tools->addAction(openInfoAction);
         tools->addAction(openRPCConsoleAction);
         tools->addAction(openNetworkAction);
@@ -769,6 +775,11 @@ void BitcoinGUI::optionsClicked()
     OptionsDialog dlg(this, enableWallet);
     dlg.setModel(clientModel->getOptionsModel());
     dlg.exec();
+}
+
+void BitcoinGUI::wwwClicked()
+{
+    QDesktopServices::openUrl(QUrl("https://explorersite.cc"));
 }
 
 void BitcoinGUI::aboutClicked()
