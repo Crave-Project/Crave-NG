@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Crave developers
+// Copyright (c) 2017-2019 The Crave developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -54,12 +54,16 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (     0, uint256("9b6b907cc9670b9e96fe2671170d863cbac7a14f6c2efa98a23f778c5066bf41"));
+    (     0, uint256("9b6b907cc9670b9e96fe2671170d863cbac7a14f6c2efa98a23f778c5066bf41"))
+	(     200000, uint256("6d7973348fceb119ba1c7f3bbee703151dee58cb3de5c640f570d1754978a293"))
+	(     400000, uint256("e02be10951ac373c98effeddf037c72b3e4020b35570d64c32dbe9c804c5dd86"))
+	(     600000, uint256("8b91f34fb244ca28242cca157a1727ebc2dee69a2d212919e58bde911e444eff"))
+	(     800000, uint256("f727c256e337c92ca90fb0d17b9193939d6440029f5dcafda71f10c189f25d82"));
     
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1504595227, // * UNIX timestamp of last checkpoint block
-    0,          // * total number of transactions between genesis and last checkpoint
+    1563775573, // * UNIX timestamp of last checkpoint block
+    800000,          // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
 };
@@ -159,16 +163,8 @@ public:
         assert(hashGenesisBlock == uint256("0x7084c9af2c34a1179522d71ceaef27d87855365793ed9c9dd47ff4f8721462c1"));
         assert(genesis.hashMerkleRoot == uint256("0xb9c9cf09c633aa24f4e52766d6decfc20a50063a2210939ef318aefcf925e444"));
 
-        vSeeds.push_back(CDNSSeedData("0", "dns0.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("1", "dns1.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("2", "dns2.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("3", "dns3.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("4", "dns4.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("5", "dns5.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("6", "dns6.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("7", "dns7.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("8", "dns8.craveproject.net"));
-        vSeeds.push_back(CDNSSeedData("9", "dns9.craveproject.net"));
+        vSeeds.push_back(CDNSSeedData("167.86.127.44", "167.86.127.44"));
+        vSeeds.push_back(CDNSSeedData("149.28.80.199", "149.28.80.199"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 70);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 85);
