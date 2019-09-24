@@ -129,6 +129,7 @@ private:
     QAction* openBlockExplorerAction;
     QAction* showHelpMessageAction;
     QAction* multiSendAction;
+    QAction* wwwAction;
 
     QSystemTrayIcon* trayIcon;
     QMenu* trayIconMenu;
@@ -239,6 +240,8 @@ private slots:
     void optionsClicked();
     /** Show about dialog */
     void aboutClicked();
+	/** View CRAVE Explorer */
+    void wwwClicked();
     /** Show help message dialog */
     void showHelpMessageClicked();
 #ifndef Q_OS_MAC
