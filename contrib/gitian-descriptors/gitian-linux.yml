@@ -34,8 +34,8 @@ packages:
 - "python3"
 reference_datetime: "2015-06-01 00:00:00"
 remotes:
-- "url": "https://github.com/Ampakinetic/Crave-Project.git"
-  "dir": "Crave-Project"
+- "url": "https://github.com/Crave-Project/Crave-NG.git"
+  "dir": "Crave-NG"
 files: []
 script: |
   set -e -o pipefail
