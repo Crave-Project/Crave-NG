@@ -109,8 +109,8 @@ def setup_repos():
    #     subprocess.check_call(['git', 'clone', 'https://github.com/crave-Community-Project/crave-detached-sigs.git'])
     if not os.path.isdir('gitian-builder'):
         subprocess.check_call(['git', 'clone', 'https://github.com/devrandom/gitian-builder.git'])
-    if not os.path.isdir('Crave-Project'):
-        subprocess.check_call(['git', 'clone', 'https://github.com/Ampakinetic/Crave-Project.git'])
+    if not os.path.isdir('Crave-NG'):
+        subprocess.check_call(['git', 'clone', 'https://github.com/Crave-Project/Crave-NG.git'])
     os.chdir('gitian-builder')
     make_image_prog = ['bin/make-base-vm', '--suite', 'bionic', '--arch', 'amd64']
     if args.docker:
@@ -148,21 +148,21 @@ def build():
 
     if args.linux:
         print('\nCompiling ' + args.version + ' Linux')
-        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'Crave-Project='+args.commit, '--url', 'Crave-Project='+args.url, '../Crave-Project/contrib/gitian-descriptors/gitian-linux.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-linux', '--destination', '../gitian.sigs/', '../Crave-Project/contrib/gitian-descriptors/gitian-linux.yml'])
+        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'Crave-NG='+args.commit, '--url', 'Crave-NG='+args.url, '../Crave-NG/contrib/gitian-descriptors/gitian-linux.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-linux', '--destination', '../gitian.sigs/', '../Crave-NG/contrib/gitian-descriptors/gitian-linux.yml'])
         subprocess.check_call('mv build/out/crave-*.tar.gz build/out/src/crave-*.tar.gz ../crave-binaries/'+args.version, shell=True)
 
     if args.windows:
         print('\nCompiling ' + args.version + ' Windows')
-        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'Crave-Project='+args.commit, '--url', 'Crave-Project='+args.url, '../Crave-Project/contrib/gitian-descriptors/gitian-win.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-unsigned', '--destination', '../gitian.sigs/', '../Crave-Project/contrib/gitian-descriptors/gitian-win.yml'])
+        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'Crave-NG='+args.commit, '--url', 'Crave-NG='+args.url, '../Crave-NG/contrib/gitian-descriptors/gitian-win.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-unsigned', '--destination', '../gitian.sigs/', '../Crave-NG/contrib/gitian-descriptors/gitian-win.yml'])
         subprocess.check_call('mv build/out/crave-*-win-unsigned.tar.gz inputs/', shell=True)
         subprocess.check_call('mv build/out/crave-*.zip build/out/crave-*.exe build/out/src/crave-*.tar.gz ../crave-binaries/'+args.version, shell=True)
 
     if args.macos:
         print('\nCompiling ' + args.version + ' MacOS')
-        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'Crave-Project='+args.commit, '--url', 'Crave-Project='+args.url, '../Crave-Project/contrib/gitian-descriptors/gitian-osx.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-unsigned', '--destination', '../gitian.sigs/', '../Crave-Project/contrib/gitian-descriptors/gitian-osx.yml'])
+        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'Crave-NG='+args.commit, '--url', 'Crave-NG='+args.url, '../Crave-NG/contrib/gitian-descriptors/gitian-osx.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-unsigned', '--destination', '../gitian.sigs/', '../Crave-NG/contrib/gitian-descriptors/gitian-osx.yml'])
         subprocess.check_call('mv build/out/crave-*-osx-unsigned.tar.gz inputs/', shell=True)
         subprocess.check_call('mv build/out/crave-*.tar.gz build/out/crave-*.dmg build/out/src/crave-*.tar.gz ../crave-binaries/'+args.version, shell=True)
 
@@ -192,8 +192,8 @@ def sign():
 
     print('\nSigning ' + args.version + ' MacOS')
     subprocess.check_call('cp inputs/crave-' + args.version + '-osx-unsigned.tar.gz inputs/crave-osx-unsigned.tar.gz', shell=True)
-    subprocess.check_call(['bin/gbuild', '--skip-image', '--upgrade', '--commit', 'signature='+args.commit, '../Crave-Project/contrib/gitian-descriptors/gitian-osx-signer.yml'])
-    subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-signed', '--destination', '../gitian.sigs/', '../Crave-Project/contrib/gitian-descriptors/gitian-osx-signer.yml'])
+    subprocess.check_call(['bin/gbuild', '--skip-image', '--upgrade', '--commit', 'signature='+args.commit, '../Crave-NG/contrib/gitian-descriptors/gitian-osx-signer.yml'])
+    subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-signed', '--destination', '../gitian.sigs/', '../Crave-NG/contrib/gitian-descriptors/gitian-osx-signer.yml'])
     subprocess.check_call('mv build/out/crave-osx-signed.dmg ../crave-binaries/'+args.version+'/crave-'+args.version+'-osx.dmg', shell=True)
 
     os.chdir(workdir)
@@ -221,28 +221,28 @@ def verify():
     os.chdir('gitian-builder')
 
     print('\nVerifying v'+args.version+' Linux\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-linux', '../Crave-Project/contrib/gitian-descriptors/gitian-linux.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-linux', '../Crave-NG/contrib/gitian-descriptors/gitian-linux.yml']):
         print('Verifying v'+args.version+' Linux FAILED\n')
         rc = 1
 
     print('\nVerifying v'+args.version+' Windows\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-win-unsigned', '../Crave-Project/contrib/gitian-descriptors/gitian-win.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-win-unsigned', '../Crave-NG/contrib/gitian-descriptors/gitian-win.yml']):
         print('Verifying v'+args.version+' Windows FAILED\n')
         rc = 1
 
     print('\nVerifying v'+args.version+' MacOS\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-osx-unsigned', '../Crave-Project/contrib/gitian-descriptors/gitian-osx.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-osx-unsigned', '../Crave-NG/contrib/gitian-descriptors/gitian-osx.yml']):
         print('Verifying v'+args.version+' MacOS FAILED\n')
         rc = 1
 
     # TODO: Skip checking signed windows sigs until we actually start producing signed windows binaries
     #print('\nVerifying v'+args.version+' Signed Windows\n')
-    #if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-win-signed', '../Crave-Project/contrib/gitian-descriptors/gitian-win-signer.yml']):
+    #if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-win-signed', '../Crave-NG/contrib/gitian-descriptors/gitian-win-signer.yml']):
     #    print('Verifying v'+args.version+' Signed Windows FAILED\n')
     #    rc = 1
 
     print('\nVerifying v'+args.version+' Signed MacOS\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-osx-signed', '../Crave-Project/contrib/gitian-descriptors/gitian-osx-signer.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-osx-signed', '../Crave-NG/contrib/gitian-descriptors/gitian-osx-signer.yml']):
         print('Verifying v'+args.version+' Signed MacOS FAILED\n')
         rc = 1
 
@@ -256,7 +256,7 @@ def main():
     parser = argparse.ArgumentParser(description='Script for running full Gitian builds.')
     parser.add_argument('-c', '--commit', action='store_true', dest='commit', help='Indicate that the version argument is for a commit or branch')
     parser.add_argument('-p', '--pull', action='store_true', dest='pull', help='Indicate that the version argument is the number of a github repository pull request')
-    parser.add_argument('-u', '--url', dest='url', default='https://github.com/Ampakinetic/Crave-Project', help='Specify the URL of the repository. Default is %(default)s')
+    parser.add_argument('-u', '--url', dest='url', default='https://github.com/Crave-Project/Crave-NG', help='Specify the URL of the repository. Default is %(default)s')
     parser.add_argument('-v', '--verify', action='store_true', dest='verify', help='Verify the Gitian build')
     parser.add_argument('-b', '--build', action='store_true', dest='build', help='Do a Gitian build')
     parser.add_argument('-s', '--sign', action='store_true', dest='sign', help='Make signed binaries for Windows and MacOS')
@@ -357,7 +357,7 @@ def main():
         raise Exception('Cannot have both commit and pull')
     args.commit = ('' if args.commit else 'v') + args.version
 
-    os.chdir('Crave-Project')
+    os.chdir('Crave-NG')
     if args.pull:
         subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/merge'])
         if not os.path.isdir('../gitian-builder/inputs/crave'):
